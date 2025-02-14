@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For my pookie</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: pink no-repeat center center/cover;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #ff66b2;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ff3385;
+        }
+
+        /* New border style */
+        .new-border {
+            border-radius: 15px;
+        }
+
+        /* Heart Rain Animation */
+        .heart-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: fall linear infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 1;
+            }
+            100% {
+                top: 110%;
+                opacity: 0;
+            }
+        }
+
+        /* Love Letter Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Cursive', sans-serif;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-rain"></div>
+
+    <div class="container">
+        <h1>Hey Baby!</h1>
+        <button class="btn" onclick="changeBorder()">Let Start</button>
+    </div>
+    
+
+    <!-- Love Letter Modal -->
+    <div id="loveLetterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoveLetter()">&times;</span>
+            <h2>To My Pookie, Mel Madi</h2>
+            <p>
+                From the moment I met you, my world has been brighter. Your smile lights up my days, and your presence brings me peace. 
+                I cherish every moment we share and look forward to a future filled with love and happiness together.
+            </p>
+            <p>Chit Tl, Thae ly</p>
+            <p>By your truely William
+                <br>
+                14 more days until 1year anniversary!!!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function changeBorder() {
+            document.querySelector('.container').classList.add('new-border');
+            document.querySelector('.container h1').innerText = 'Wanna see a surprise?';
+            const btn = document.querySelector('.btn');
+            btn.innerText = 'Yea, What it is?';
+            btn.onclick = showLoveLetter;
+        }
+
+        function showLoveLetter() {
+            startHeartRain();
+            document.getElementById('loveLetterModal').style.display = 'block';
+        }
+
+        function closeLoveLetter() {
+            document.getElementById('loveLetterModal').style.display = 'none';
+            stopHeartRain();
+        }
+
+        function startHeartRain() {
+            const heartRainContainer = document.querySelector('.heart-rain');
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                heart.style.opacity = Math.random();
+                heartRainContainer.appendChild(heart);
+            }
+        }
+
+        function stopHeartRain() {
+            const heartRainContainer = document.querySelector('.heart-rain');
+            heartRainContainer.innerHTML = '';
+        }
+    </script>
+
+</body>
+</html>
